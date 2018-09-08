@@ -13,7 +13,10 @@ export const getById = async ({ pathParameters: { id } }, context, callback) => 
   } else {
     const response = {
       statusCode: 200,
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Access-Control-Allow-Origin': '*', // Required for CORS support to work in LAMBDA-PROXY integration
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify(item)
     }
 
@@ -33,7 +36,10 @@ const handleErr = (error, statusCode = 500) => {
 
   return {
     statusCode,
-    headers: { 'Content-Type': 'application/json' },
+    headers: {
+      'Access-Control-Allow-Origin': '*', // Required for CORS support to work in LAMBDA-PROXY integration
+      'Content-Type': 'application/json'
+    },
     body: JSON.stringify({ error })
   }
 }
