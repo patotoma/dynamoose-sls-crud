@@ -1,8 +1,8 @@
+import dynamoose from 'dynamoose'
+
 if (!global._babelPolyfill) {
   require('babel-polyfill')
 }
-
-import dynamoose from 'dynamoose' // eslint-disable-line
 
 const { Schema } = dynamoose
 

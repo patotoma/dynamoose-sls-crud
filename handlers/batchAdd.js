@@ -1,10 +1,10 @@
+import pe from 'parse-error'
+import uuid from 'uuid/v1'
+import { Item } from '../models/item'
+
 if (!global._babelPolyfill) {
   require('babel-polyfill')
 }
-
-import { Item } from '../models/item' // eslint-disable-line
-import pe from 'parse-error' // eslint-disable-line
-import uuid from 'uuid/v1' // eslint-disable-line
 
 export const batchAdd = async ({ body }, context, callback) => {
   const [err, items] = await to(Promise.all(addItems(body)))

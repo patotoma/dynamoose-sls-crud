@@ -1,9 +1,9 @@
+import pe from 'parse-error'
+import { Item } from '../models/item'
+
 if (!global._babelPolyfill) {
   require('babel-polyfill')
 }
-
-import { Item } from '../models/item' // eslint-disable-line
-import pe from 'parse-error' // eslint-disable-line
 
 export const getById = async ({ pathParameters: { id } }, context, callback) => {
   const [err, item] = await to(Item.get({ id }))
