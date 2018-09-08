@@ -19,4 +19,4 @@ const itemSchema = new Schema({
   timestamps: true
 })
 
-export const Item = dynamoose.model(process.env.ITEM_TABLE, itemSchema)
+export const Item = dynamoose.model(process.env.DYNAMODB_TABLE, itemSchema)

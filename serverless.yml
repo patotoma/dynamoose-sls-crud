@@ -19,13 +19,13 @@ provider:
   stage: ${opt:stage, 'dev'}
   region: us-east-1
   environment:
-      ITEM_TABLE: item-dynacrud-${opt:stage, self:provider.stage}
+    DYNAMODB_TABLE: ${self:service}-${opt:stage, self:provider.stage}
 
   iamRoleStatements:
     - Effect: Allow
       Action:
         - dynamodb:*
-      Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.ITEM_TABLE}"
+      Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.DYNAMODB_TABLE}"
 
 functions:
   getById:
@@ -93,4 +93,4 @@ resources:
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
-        TableName: ${self:provider.environment.ITEM_TABLE}
+        TableName: ${self:provider.environment.DYNAMODB_TABLE}
