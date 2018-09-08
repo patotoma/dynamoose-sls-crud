@@ -1,5 +1,4 @@
 import pe from 'parse-error'
-import uuid from 'uuid/v1'
 import { Item } from '../models/item'
 
 if (!global._babelPolyfill) {
