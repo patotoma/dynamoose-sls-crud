@@ -1,6 +1,6 @@
-import pe from 'parse-error'
 import uuid from 'uuid/v1'
 import { Item } from '../models/item'
+import { to, handleErr } from '../utils'
 
 if (!global._babelPolyfill) {
   require('babel-polyfill')
@@ -36,24 +36,5 @@ const addItems = data => {
     }))
   } else {
     throw new Error('Type of items to add must be an array')
-  }
-}
-
-// *** Error handling support in promises
-const to = promise =>
-  promise
-    .then(data => [null, data])
-    .catch(err => [pe(err)])
-
-const handleErr = (error, statusCode = 500) => {
-  console.error(' => ERROR:', error.stack)
-
-  return {
-    statusCode,
-    headers: {
-      'Access-Control-Allow-Origin': '*', // Required for CORS support to work in LAMBDA-PROXY integration
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ error })
   }
 }

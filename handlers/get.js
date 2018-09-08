@@ -1,5 +1,5 @@
-import pe from 'parse-error'
 import { Item } from '../models/item'
+import { to, handleErr } from '../utils'
 
 if (!global._babelPolyfill) {
   require('babel-polyfill')
@@ -22,24 +22,5 @@ export const getById = async ({ pathParameters: { id } }, context, callback) => 
 
     console.log(` => Item retreived [${item.id}]`)
     callback(null, response)
-  }
-}
-
-// *** Error handling support in promises
-const to = promise =>
-  promise
-    .then(data => [null, data])
-    .catch(err => [pe(err)])
-
-const handleErr = (error, statusCode = 500) => {
-  console.error(' => ERROR:', error.stack)
-
-  return {
-    statusCode,
-    headers: {
-      'Access-Control-Allow-Origin': '*', // Required for CORS support to work in LAMBDA-PROXY integration
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ error })
   }
 }
